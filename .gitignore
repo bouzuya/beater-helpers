@@ -1,5 +1,6 @@
 .DS_Store
 .env*
 .tmp/
-lib/
+/*.d.ts
+/*.js
 node_modules/
