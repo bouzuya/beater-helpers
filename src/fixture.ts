@@ -1,5 +1,5 @@
-export type BeforeFn<T> = (() => void) | (() => T | Promise<T>);
-export type AfterFn<T> = ((context?: T) => void | Promise<void>);
+export type SetUpFn<T> = (() => void) | (() => T | Promise<T>);
+export type TearDownFn<T> = ((context?: T) => void | Promise<void>);
 export type TestFn<T, U> = ((context?: T) => void) | ((context?: T) => U | Promise<U>);
 export type Fn<T, U> = (context?: T) => Promise<U | undefined>;
 
@@ -25,21 +25,21 @@ const wrapFn = <T, U>(f: TestFn<T, U>): Fn<T, U> => {
 
 const fixture = <T, U>(
   options: {
-    before?: BeforeFn<T>;
-    after?: AfterFn<T>;
+    setUp?: SetUpFn<T>;
+    tearDown?: TearDownFn<T>;
   },
   test: TestFn<T, U>
 ): () => Promise<void> => {
-  const before: BeforeFn<T> = typeof options.before !== 'undefined'
-    ? options.before : () => void 0;
-  const after: AfterFn<T> = typeof options.after !== 'undefined'
-    ? options.after : () => void 0;
-  const b: Fn<undefined, T> = wrapFn<undefined, T>(before);
-  const a: Fn<T, undefined> = wrapFn<T, undefined>(after);
-  const t: Fn<T, U> = wrapFn<T, U>(test);
+  const setUpFn: Fn<undefined, T> = wrapFn<undefined, T>(
+    typeof options.setUp !== 'undefined' ? options.setUp : () => void 0
+  );
+  const tearDownFn: Fn<T, undefined> = wrapFn<T, undefined>(
+    typeof options.tearDown !== 'undefined' ? options.tearDown : () => void 0
+  );
+  const testFn: Fn<T, U> = wrapFn<T, U>(test);
   return () => {
-    return b()
-      .then((c) => promiseFinally(t(c), () => a(c)))
+    return setUpFn()
+      .then((c) => promiseFinally(testFn(c), () => tearDownFn(c)))
       .then(() => Promise.resolve());
   };
 };
