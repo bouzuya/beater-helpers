@@ -2,6 +2,8 @@
 
 A collection of helper functions for [bouzuya/beater][].
 
+[bouzuya/beater]: https://github.com/bouzuya/beater
+
 ## Installation
 
 ```
