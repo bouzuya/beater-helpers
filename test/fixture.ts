@@ -1,6 +1,6 @@
 import { Test, test } from 'beater';
-import * as assert from 'power-assert';
-import * as sinon from 'sinon';
+import assert from 'power-assert';
+import sinon from 'sinon';
 import { fixture } from '../src/fixture';
 
 const category = '/fixture ';
