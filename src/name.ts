@@ -1,10 +1,10 @@
 import { Test } from 'beater-reporter';
 
-const named = (name: string, t: Test): Test => {
+const namedFn = (name: string, t: Test): Test => {
   Object.defineProperty(t, 'name', { value: name });
   return t;
 };
 
-const name = (t: Test): string => t.name;
+const nameFn = (t: Test): string => t.name;
 
-export { name, named };
+export { nameFn as name, namedFn as named };

@@ -16,10 +16,10 @@ const tests: Test[] = group('fixture/', [
       assert(setUpFn.callCount === 1);
       assert(testFn.callCount === 1);
       assert(testFn.getCall(0).args.length === 1);
-      assert(testFn.getCall(0).args[0] === undefined);
+      assert(testFn.getCall(0).args[0] === void 0);
       assert(tearDownFn.callCount === 1);
       assert(tearDownFn.getCall(0).args.length === 1);
-      assert(tearDownFn.getCall(0).args[0] === undefined);
+      assert(tearDownFn.getCall(0).args[0] === void 0);
     });
   }),
 

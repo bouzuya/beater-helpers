@@ -14,7 +14,7 @@ const fixture = <T, U>(
   tearDown: (context: T) => void | Promise<void>,
   test: (context: T) => U | Promise<U>
 ): () => Promise<void> => {
-  return () => {
+  return (): Promise<void> => {
     return promiseTry(setUp)
       .then((c) =>
         promiseFinally(
