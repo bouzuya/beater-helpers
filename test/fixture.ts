@@ -1,11 +1,10 @@
 import assert from 'power-assert';
 import sinon from 'sinon';
 import { fixture } from '../src/fixture';
-import { Test, test } from './helper';
+import { Test, group, test } from './helper';
 
-const category = '/fixture ';
-const tests: Test[] = [
-  test(category + 'setUp (void) -> test (void) -> tearDown (void)', () => {
+const tests: Test[] = group('fixture/', [
+  test('setUp (void) -> test (void) -> tearDown (void)', () => {
     const setUpFn = sinon.stub();
     const testFn = sinon.stub();
     const tearDownFn = sinon.stub();
@@ -23,7 +22,8 @@ const tests: Test[] = [
       assert(tearDownFn.getCall(0).args[0] === undefined);
     });
   }),
-  test(category + 'setUp (t) -> test (void) -> tearDown (void)', () => {
+
+  test('setUp (t) -> test (void) -> tearDown (void)', () => {
     const context = true;
     const setUpFn = sinon.stub().returns(context);
     const testFn = sinon.stub();
@@ -42,7 +42,8 @@ const tests: Test[] = [
       assert(tearDownFn.getCall(0).args[0] === context);
     });
   }),
-  test(category + 'setUp (promise<t>) -> test (void) -> tearDown (void)', () => {
+
+  test('setUp (promise<t>) -> test (void) -> tearDown (void)', () => {
     const context = true;
     const setUpFn = sinon.stub().returns(Promise.resolve(context));
     const testFn = sinon.stub();
@@ -61,7 +62,8 @@ const tests: Test[] = [
       assert(tearDownFn.getCall(0).args[0] === context);
     });
   }),
-  test(category + 'setUp (promise<t>) -> test (t) -> tearDown (void)', () => {
+
+  test('setUp (promise<t>) -> test (t) -> tearDown (void)', () => {
     const context = true;
     const setUpFn = sinon.stub().returns(Promise.resolve(context));
     const value = 123;
@@ -81,7 +83,8 @@ const tests: Test[] = [
       assert(tearDownFn.getCall(0).args[0] === context);
     });
   }),
-  test(category + 'setUp (promise<t>) -> test (promise<t>) -> tearDown (void)', () => {
+
+  test('setUp (promise<t>) -> test (promise<t>) -> tearDown (void)', () => {
     const context = true;
     const setUpFn = sinon.stub().returns(Promise.resolve(context));
     const value = 123;
@@ -101,7 +104,8 @@ const tests: Test[] = [
       assert(tearDownFn.getCall(0).args[0] === context);
     });
   }),
-  test(category + 'setUp (promise<t>) -> test (promise<t>) -> tearDown (promise<void>)', () => {
+
+  test('setUp (promise<t>) -> test (promise<t>) -> tearDown (promise<void>)', () => {
     const context = true;
     const setUpFn = sinon.stub().returns(Promise.resolve(context));
     const value = 123;
@@ -121,6 +125,6 @@ const tests: Test[] = [
       assert(tearDownFn.getCall(0).args[0] === context);
     });
   })
-];
+]);
 
 export { tests };

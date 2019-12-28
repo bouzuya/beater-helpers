@@ -1,10 +1,9 @@
 import assert from "power-assert";
 import { name, named } from "../src/name";
-import { Test, test } from "./helper";
+import { Test, group, test } from "./helper";
 
-const category = "/name ";
-const tests: Test[] = [
-  test(category + "name & named", () => {
+const tests: Test[] = group('/', [
+  test("name & named", () => {
     assert.deepStrictEqual(
       name(function foo() {}),
       "foo"
@@ -15,6 +14,6 @@ const tests: Test[] = [
       "space included"
     );
   })
-];
+]);
 
 export { tests };

@@ -1,20 +1,19 @@
 import assert from 'power-assert';
 import { fixture, name, named } from '../src';
-import { Test, test } from './helper';
+import { Test, group, test } from './helper';
 
-const category = '/ ';
-const tests: Test[] = [
-  test(category + 'fixture', () => {
+const tests: Test[] = group('index-export/', [
+  test('fixture', () => {
     assert(fixture);
   }),
 
-  test(category + 'name', () => {
+  test('name', () => {
     assert(name);
   }),
 
-  test(category + 'named', () => {
+  test('named', () => {
     assert(named);
   })
-];
+]);
 
 export { tests };
