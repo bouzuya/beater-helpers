@@ -9,9 +9,9 @@ const tests: Test[] = group('fixture/', [
     const testFn = sinon.stub();
     const tearDownFn = sinon.stub();
     return fixture(
-      setUpFn as (() => void),
-      tearDownFn as (() => void),
-      testFn as (() => void)
+      setUpFn as () => void,
+      tearDownFn as () => void,
+      testFn as () => void
     )().then(() => {
       assert(setUpFn.callCount === 1);
       assert(testFn.callCount === 1);
@@ -29,9 +29,9 @@ const tests: Test[] = group('fixture/', [
     const testFn = sinon.stub();
     const tearDownFn = sinon.stub();
     return fixture(
-      setUpFn as (() => typeof context),
-      tearDownFn as (() => void),
-      testFn as (() => void)
+      setUpFn as () => typeof context,
+      tearDownFn as () => void,
+      testFn as () => void
     )().then(() => {
       assert(setUpFn.callCount === 1);
       assert(testFn.callCount === 1);
@@ -49,9 +49,9 @@ const tests: Test[] = group('fixture/', [
     const testFn = sinon.stub();
     const tearDownFn = sinon.stub();
     return fixture(
-      setUpFn as (() => Promise<typeof context>),
-      tearDownFn as (() => void),
-      testFn as (() => void)
+      setUpFn as () => Promise<typeof context>,
+      tearDownFn as () => void,
+      testFn as () => void
     )().then(() => {
       assert(setUpFn.callCount === 1);
       assert(testFn.callCount === 1);
@@ -70,9 +70,9 @@ const tests: Test[] = group('fixture/', [
     const testFn = sinon.stub().returns(value);
     const tearDownFn = sinon.stub();
     return fixture(
-      setUpFn as (() => Promise<typeof context>),
-      tearDownFn as (() => void),
-      testFn as (() => void)
+      setUpFn as () => Promise<typeof context>,
+      tearDownFn as () => void,
+      testFn as () => void
     )().then(() => {
       assert(setUpFn.callCount === 1);
       assert(testFn.callCount === 1);
@@ -91,9 +91,9 @@ const tests: Test[] = group('fixture/', [
     const testFn = sinon.stub().returns(Promise.resolve(value));
     const tearDownFn = sinon.stub();
     return fixture(
-      setUpFn as (() => Promise<typeof context>),
-      tearDownFn as (() => void),
-      testFn as (() => void)
+      setUpFn as () => Promise<typeof context>,
+      tearDownFn as () => void,
+      testFn as () => void
     )().then(() => {
       assert(setUpFn.callCount === 1);
       assert(testFn.callCount === 1);
@@ -112,9 +112,9 @@ const tests: Test[] = group('fixture/', [
     const testFn = sinon.stub().returns(Promise.resolve(value));
     const tearDownFn = sinon.stub().returns(Promise.resolve());
     return fixture(
-      setUpFn as (() => Promise<typeof context>),
-      tearDownFn as (() => Promise<void>),
-      testFn as (() => Promise<typeof value>)
+      setUpFn as () => Promise<typeof context>,
+      tearDownFn as () => Promise<void>,
+      testFn as () => Promise<typeof value>
     )().then(() => {
       assert(setUpFn.callCount === 1);
       assert(testFn.callCount === 1);

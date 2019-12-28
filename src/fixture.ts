@@ -1,7 +1,15 @@
 const promiseFinally = <T, U>(promise: Promise<T>, f: () => U): Promise<T> => {
   return promise.then(
-    (v) => promiseTry(f).then((_) => Promise.resolve(v), (_) => Promise.resolve(v)),
-    (e) => promiseTry(f).then((_) => Promise.reject(e), (_) => Promise.reject(e))
+    (v) =>
+      promiseTry(f).then(
+        (_) => Promise.resolve(v),
+        (_) => Promise.resolve(v)
+      ),
+    (e) =>
+      promiseTry(f).then(
+        (_) => Promise.reject(e),
+        (_) => Promise.reject(e)
+      )
   );
 };
 
@@ -13,7 +21,7 @@ const fixture = <T, U>(
   setUp: () => T | Promise<T>,
   tearDown: (context: T) => void | Promise<void>,
   test: (context: T) => U | Promise<U>
-): () => Promise<void> => {
+): (() => Promise<void>) => {
   return (): Promise<void> => {
     return promiseTry(setUp)
       .then((c) =>
