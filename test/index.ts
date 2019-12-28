@@ -1,7 +1,7 @@
-import { Test, run, test } from 'beater';
 import assert from 'power-assert';
 import { fixture } from '../src';
 import { tests as fixtureTests } from './fixture';
+import { Test, run, test } from './helper';
 
 const category = '/ ';
 const tests: Test[] = [

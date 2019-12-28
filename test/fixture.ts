@@ -1,7 +1,7 @@
-import { Test, test } from 'beater';
 import assert from 'power-assert';
 import sinon from 'sinon';
 import { fixture } from '../src/fixture';
+import { Test, test } from './helper';
 
 const category = '/fixture ';
 const tests: Test[] = [
