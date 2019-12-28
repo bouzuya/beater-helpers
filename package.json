@@ -51,6 +51,8 @@
   "files": [
     "fixture.d.ts",
     "fixture.js",
+    "name.d.ts",
+    "name.js",
     "index.d.ts",
     "index.js"
   ],
