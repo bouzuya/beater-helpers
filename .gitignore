@@ -1,6 +1,6 @@
-.DS_Store
-.env*
-.tmp/
 /*.d.ts
 /*.js
-node_modules/
+/.DS_Store
+/.env*
+/.tmp/
+/node_modules/
