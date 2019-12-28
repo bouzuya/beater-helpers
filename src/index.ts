@@ -1,3 +1,4 @@
 import { fixture } from './fixture';
+import { name, named } from './name';
 
-export { fixture };
+export { fixture, name, named };

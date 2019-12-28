@@ -1,10 +1,5 @@
 import { Test, run } from 'beater';
-import { fixture } from '../src';
-
-const named = (name: string, t: Test): Test => {
-  Object.defineProperty(t, 'name', { value: name });
-  return t;
-};
+import { fixture, named } from '../src';
 
 const test = named;
 
